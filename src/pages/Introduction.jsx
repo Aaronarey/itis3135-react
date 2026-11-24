@@ -3,6 +3,7 @@
   The background bullets and courses are kept as data and mapped into
   the same list markup the regular page uses.
 */
+import { Link } from "react-router-dom";
 import usePageTitle from "../hooks/usePageTitle.js";
 
 const BACKGROUND = [
@@ -15,7 +16,7 @@ const BACKGROUND = [
 ];
 
 const COURSES = [
-  { name: "ITIS 3135 - Front-End Web App Development", reason: "Major requirement, and I want to be able to build and ship a functional website on my own." },
+  { name: "ITIS 3135 - Front-End Web App Development", contract: true, reason: "Major requirement, and I want to be able to build and ship a functional website on my own." },
   { name: "ITIS 3200 - Intro to Information Security & Privacy", reason: "Core security course for my degree, and a solid foundation for understanding how systems get broken." },
   { name: "ITIS 4214 - Usable Security and Privacy", reason: "I'm interested in the human side of security: why people ignore warnings and make risky choices even when the tech works." },
   { name: "ITSC 2181 - Intro to Computer Systems", reason: "Required for my degree; I want to understand what's happening underneath the code I write." }
@@ -43,7 +44,10 @@ export default function Introduction() {
         <li><strong>Courses I'm Taking &amp; Why:</strong>
           <ol>
             {COURSES.map((course) => (
-              <li key={course.name}><strong>{course.name}:</strong> {course.reason}</li>
+              <li key={course.name}>
+                {/* This course links to my contract, the same as the regular introduction page */}
+                <strong>{course.contract ? <Link to="/contract">{course.name}</Link> : course.name}:</strong> {course.reason}
+              </li>
             ))}
           </ol>
         </li>
